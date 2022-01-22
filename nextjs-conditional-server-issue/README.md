@@ -1,0 +1,97 @@
+# Minimal Repro: Next.js custom express server: Can't conditionally serve Next directories
+
+## Goal
+
+I want to conditionally serve different Next directories (based on a cookie value) within a custom Express server.
+
+## Issue Summary
+
+Running `next({ ..., dir: 'a' }).prepare()` once on a server runtime seems to make it impossible to later run `next({ ..., dir: 'b' }).prepare()` to serve a different directory to an entirely different session.
+
+## Repro
+
+1.  Clone this repo
+2.  Run `yarn serve`
+3.  Visit `localhost:4000` in a private browser window
+4.  Read: `Visit /a or /b to continue`
+5.  Visit `localhost:4000/a` (for this example)
+6.  Read: `Your choice is a. Now, return to /`
+7.  Visit `localhost:4000`
+8.  Read: `Welcome to a`
+9.  Now, visit `localhost:4000` in a different browser window (that doesn't share cookies with the first) and read instruction
+10. Visit `localhost:4000/b` and read message
+11. Finally, visit `localhost:4000`
+
+**Expected:** Read: `Welcome to b`
+
+**Actual:** Read: `Welcome to a`
+
+*Note:* Visiting `/b` first will indeed persist `Welcome to b` instead.
+
+## Code
+
+Here's the code in `server.js`, minimally changed from the official [Custom Express Server example](https://github.com/vercel/next.js/tree/canary/examples/custom-server-express):
+
+```js
+// server.js
+const express = require('express')
+const next = require('next')
+
+const cookieParser = require('cookie-parser')
+
+const port = parseInt(process.env.PORT, 10) || 4000
+const dev = process.env.NODE_ENV !== 'production'
+const appA = next({ dev, dir: 'a' })
+const handleA = appA.getRequestHandler()
+const appB = next({ dev, dir: 'b' })
+const handleB = appB.getRequestHandler()
+
+const server = express()
+
+server.use(cookieParser())
+
+server.get('/a', (req, res) => {
+  res.cookie('choice', 'a')
+  res.status(200).send('Your choice is a. Now, return to /')
+})
+
+server.get('/b', (req, res) => {
+  res.cookie('choice', 'b')
+  res.status(200).send('Your choice is b. Now, return to /')
+})
+
+server.all('*', (req, res, goNext) => {
+  const cookieChoice = req.cookies['choice'] || ''
+  const chooseMessage = 'Visit /a or /b to continue'
+  if (!cookieChoice) {
+    res.send(chooseMessage)
+  } else {
+    let app
+    let handle
+    switch (cookieChoice) {
+      case 'a':
+        app = appA
+        handle = handleA
+        break
+      case 'b':
+        app = appB
+        handle = handleB
+        break
+      default:
+        res.send(chooseMessage)
+    }
+
+    app.prepare()
+      .then(() => {
+        handle(req, res) 
+      })
+
+    goNext()
+  }
+})
+
+server.listen(port, (err) => {
+  if (err) throw err
+  console.log(`> Ready on http://localhost:${port}`)
+})
+```
