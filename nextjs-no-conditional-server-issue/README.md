@@ -6,7 +6,7 @@ I want to conditionally serve different Next directories to different sessions (
 
 ## Issue Summary
 
-Running `next({ ..., dir: 'a' }).prepare()` once on a server runtime seems to make it impossible to later run `next({ ..., dir: 'b' }).prepare()` to serve a different directory to a different session.
+After Next app server serves one directory (`next({ dir: 'a' })`) in a server runtime, it seems impossible to later serve a different directory (`next({ dir: 'b' })`), even to an entirely different session or machine.
 
 ## Repro
 
@@ -18,7 +18,7 @@ Running `next({ ..., dir: 'a' }).prepare()` once on a server runtime seems to ma
 6.  Read: `Your choice is a. Now, return to /`
 7.  Visit `localhost:4000`
 8.  Read: `Welcome to a`
-9.  Now, visit `localhost:4000` in a different browser window (or different machine)) and read instruction
+9.  Now, visit `localhost:4000` in a different private browser window (or different machine) and read instruction
 10. Visit `localhost:4000/b` and read message
 11. Finally, visit `localhost:4000`
 
