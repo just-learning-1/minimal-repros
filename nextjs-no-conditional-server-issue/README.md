@@ -1,12 +1,12 @@
-# Minimal Repro: Next.js custom express server: Can't conditionally serve Next directories
+# Minimal Repro: Next.js can't conditionally serve different Next directories (custom Express server)
 
 ## Goal
 
-I want to conditionally serve different Next directories (based on a cookie value) within a custom Express server.
+I want to conditionally serve different Next directories to different sessions (based on a cookie value) within a custom Express server.
 
 ## Issue Summary
 
-Running `next({ ..., dir: 'a' }).prepare()` once on a server runtime seems to make it impossible to later run `next({ ..., dir: 'b' }).prepare()` to serve a different directory to an entirely different session.
+Running `next({ ..., dir: 'a' }).prepare()` once on a server runtime seems to make it impossible to later run `next({ ..., dir: 'b' }).prepare()` to serve a different directory to a different session.
 
 ## Repro
 
@@ -18,7 +18,7 @@ Running `next({ ..., dir: 'a' }).prepare()` once on a server runtime seems to ma
 6.  Read: `Your choice is a. Now, return to /`
 7.  Visit `localhost:4000`
 8.  Read: `Welcome to a`
-9.  Now, visit `localhost:4000` in a different browser window (that doesn't share cookies with the first) and read instruction
+9.  Now, visit `localhost:4000` in a different browser window (or different machine)) and read instruction
 10. Visit `localhost:4000/b` and read message
 11. Finally, visit `localhost:4000`
 
@@ -34,13 +34,14 @@ Here's the code in `server.js`, minimally changed from the official [Custom Expr
 
 ```js
 // server.js
+const cookieParser = require('cookie-parser')
 const express = require('express')
 const next = require('next')
 
-const cookieParser = require('cookie-parser')
-
 const port = parseInt(process.env.PORT, 10) || 4000
 const dev = process.env.NODE_ENV !== 'production'
+
+// Want different next apps & handlers to conditionally source different directories
 const appA = next({ dev, dir: 'a' })
 const handleA = appA.getRequestHandler()
 const appB = next({ dev, dir: 'b' })
@@ -50,11 +51,13 @@ const server = express()
 
 server.use(cookieParser())
 
+// Visit /a to receive cookie with choice=a
 server.get('/a', (req, res) => {
   res.cookie('choice', 'a')
   res.status(200).send('Your choice is a. Now, return to /')
 })
 
+// Visit /b to receive cookie with choice=b
 server.get('/b', (req, res) => {
   res.cookie('choice', 'b')
   res.status(200).send('Your choice is b. Now, return to /')
@@ -63,17 +66,21 @@ server.get('/b', (req, res) => {
 server.all('*', (req, res, goNext) => {
   const cookieChoice = req.cookies['choice'] || ''
   const chooseMessage = 'Visit /a or /b to continue'
+
   if (!cookieChoice) {
+    // When no cookie, send message
     res.send(chooseMessage)
   } else {
     let app
     let handle
     switch (cookieChoice) {
       case 'a':
+        // Set app & handler to serve directory 'a/'
         app = appA
         handle = handleA
         break
       case 'b':
+        // Set app & handler to serve directory 'b/'
         app = appB
         handle = handleB
         break
@@ -81,6 +88,7 @@ server.all('*', (req, res, goNext) => {
         res.send(chooseMessage)
     }
 
+    // Want to conditionally serve 'a/' or 'b/' here
     app.prepare()
       .then(() => {
         handle(req, res) 
