@@ -1,8 +1,14 @@
 import React from 'react'
 
-import * as Dialog from '@radix-ui/react-dialog'
+import * as DialogPrimitive from '@radix-ui/react-dialog'
 import Head from 'next/head'
 import Link from 'next/link'
+
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from '../base/Dialog'
 
 export default function RadixDialogMobileIssue() {
   const projectDir = process.env.PATH_BASE || ''
@@ -32,14 +38,14 @@ export default function RadixDialogMobileIssue() {
             click the following button to open the Radix UI Dialog.
           </li>
           <li>
-            <Dialog.Root>
-              <Dialog.Trigger asChild>
+            <DialogPrimitive.Root>
+              <DialogPrimitive.Trigger asChild>
                 <button type="button">
                   Tap Me, then Tap Me again after dismissing the dialog
                 </button>
-              </Dialog.Trigger>
-              <Dialog.Portal>
-                <Dialog.Overlay
+              </DialogPrimitive.Trigger>
+              <DialogPrimitive.Portal>
+                <DialogPrimitive.Overlay
                   style={{
                     backgroundColor: 'rgba(0, 0, 0, 0.5)',
                     bottom: 0,
@@ -50,7 +56,7 @@ export default function RadixDialogMobileIssue() {
                     zIndex: '101',
                   }}
                 />
-                <Dialog.Content
+                <DialogPrimitive.Content
                   style={{
                     backgroundColor: '#ffffff',
                     borderRadius: '12px',
@@ -66,13 +72,13 @@ export default function RadixDialogMobileIssue() {
                     zIndex: '101',
                   }}
                 >
-                  <Dialog.Close>Dismiss</Dialog.Close>
-                  <Dialog.Description>
+                  <DialogPrimitive.Close>Dismiss</DialogPrimitive.Close>
+                  <DialogPrimitive.Description>
                     Now dismiss this dialog, then try tapping the earlier button again
-                  </Dialog.Description>
-                </Dialog.Content>
-              </Dialog.Portal>
-            </Dialog.Root>
+                  </DialogPrimitive.Description>
+                </DialogPrimitive.Content>
+              </DialogPrimitive.Portal>
+            </DialogPrimitive.Root>
           </li>
           <li>
             <strong>Result: </strong>
@@ -83,18 +89,16 @@ export default function RadixDialogMobileIssue() {
             Interactive elements should be interactable right away.
           </li>
           <li>
-            <Dialog.Root>
-              <Dialog.Trigger asChild>
+            <Dialog>
+              <DialogTrigger asChild>
                 <button type="button">
                   Here is a second button whose pointer event also gets eaten
                 </button>
-              </Dialog.Trigger>
-              <Dialog.Content>
-                <Dialog.Description>
-                  Now dismiss this dialog, then try tapping the earlier button again
-                </Dialog.Description>
-              </Dialog.Content>
-            </Dialog.Root>
+              </DialogTrigger>
+              <DialogContent>
+                Now dismiss this dialog, then try tapping the earlier button again
+              </DialogContent>
+            </Dialog>
           </li>
         </ol>
       </div>
