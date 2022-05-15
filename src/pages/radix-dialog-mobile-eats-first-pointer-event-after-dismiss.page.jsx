@@ -12,7 +12,7 @@ import {
 } from '../base/Dialog'
 
 export default function RadixDialogMobileIssue() {
-  const projectDir = process.env.PATH_BASE || ''
+  const projectDir = process.env.NEXT_PUBLIC_PATH_BASE || ''
   const codeForFirstDialog = `// from this page
 <Dialog>
   <DialogTrigger asChild>

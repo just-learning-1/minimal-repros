@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export default function Home() {
-  const projectDir = process.env.PATH_BASE || ''
+  const projectDir = process.env.NEXT_PUBLIC_PATH_BASE || ''
 
   return (
     <div>
