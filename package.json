@@ -1,23 +1,16 @@
 {
   "private": true,
   "scripts": {
-    "build": "$npm_package_env_PROD next build",
-    "dev": "$npm_package_env_DEV next dev -p 4100",
+    "build": "next build",
+    "dev": "next dev -p 4100",
     "deploy": "rm -rf node_modules/.cache && yarn build && yarn export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy Next.js to gh-pages\" && git subtree push --prefix out origin gh-pages",
-    "export": "$npm_package_env_PROD next export",
-    "start": "$npm_package_env_PROD next start"
-  },
-  "env": {
-    "COMMON": "env-cmd -f ./.env/common.env.js",
-    "DEV": "env-cmd -f ./.env/development.env.js",
-    "PROD": "env-cmd -f ./.env/production.env.js",
-    "TEST": "env-cmd -f ./.env/test.env.js"
+    "export": "next export",
+    "start": "next start"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.2",
     "@radix-ui/react-dialog": "^0.1.7",
     "@stitches/react": "^1.2.8",
-    "env-cmd": "^10.1.0",
     "next": "12.0.9",
     "prop-types": "^15.8.1",
     "react": "17.0.2",
