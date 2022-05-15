@@ -13,9 +13,9 @@ export default function Home() {
             as={`${projectDir}/radix-dialog-mobile-eats-first-pointer-event-after-dismiss`}
           >
             <a>Issue: Radix Dialog on mobile eats first pointer event after dismiss</a>
-            {' '}
-            <em>Created 2022-05-14</em>
           </Link>
+          {' '}
+          <em>Created 2022-05-14</em>
         </ul>
       </ol>
     </div>

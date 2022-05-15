@@ -57,6 +57,11 @@ module.exports = {
       ignoredNodes: ['ConditionalExpression'],
       SwitchCase: 1,
     }],
+    'jsx-a11y/anchor-is-valid': ['error', {
+      components: ['Link'],
+      specialLink: ['hrefLeft', 'hrefRight'],
+      aspects: ['invalidHref', 'preferButton'],
+    }],
     'jsx-a11y/href-no-hash': ['off'],
     'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
     'react/jsx-props-no-spreading': ['off'],
