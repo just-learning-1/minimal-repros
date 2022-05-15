@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export default function Home() {
-  const projectDir = '/minimal-repros'
+  const projectDir = process.env.PATH_BASE || ''
 
   return (
     <div>
