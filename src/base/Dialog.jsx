@@ -81,6 +81,7 @@ const DialogContentContainer = styled(DialogPrimitive.Content, {
   position: 'fixed',
   top: '0%',
   width: '100%',
+  willChange: 'transform',
   zIndex: '101',
   '&:focus': { outline: 'none' },
   '&[data-state="open"]': {
@@ -91,9 +92,6 @@ const DialogContentContainer = styled(DialogPrimitive.Content, {
     animation: `${slideOut} 500ms cubic-bezier(0.22, 1, 0.36, 1),`
                + `${fadeOut} 300ms cubic-bezier(0.22, 1, 0.36, 1)`,
   },
-  // Among other things, prevents text alignment inconsistencies when dialog can't be centered in
-  // the viewport evenly. Affects animated and non-animated dialogs alike.
-  willChange: 'transform',
 
   '@desktop': {
     borderRadius: '12px',
