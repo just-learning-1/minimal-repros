@@ -1,9 +1,7 @@
 import React from 'react'
 
-import * as DialogPrimitive from '@radix-ui/react-dialog'
 import Head from 'next/head'
 import Link from 'next/link'
-import SyntaxHighlighter from 'react-syntax-highlighter'
 
 import {
   Dialog,
@@ -13,46 +11,6 @@ import {
 
 export default function RadixDialogMobileIssue() {
   const projectDir = process.env.NEXT_PUBLIC_PATH_BASE || ''
-  const codeForFirstDialog = `// from this page
-<Dialog>
-  <DialogTrigger asChild>
-    <button type="button">
-      Tap Me, then Tap Me Again after dismissing the dialog
-    </button>
-  </DialogTrigger>
-  <DialogContent>
-  </DialogContent>
-</Dialog>
-
-// from Dialog.jsx
-export const DialogContent = React.forwardRef(({ children, ...props }, forwardedRef) => (
-  <DialogContentContainer {...props} ref={forwardedRef}>
-    <DialogHeaderBar>
-      <CloseButton aria-label="close" asChild>
-        <button type="button">
-          Dismiss
-        </button>
-      </CloseButton>
-    </DialogHeaderBar>
-    <DialogContentBody>
-      {children}
-    </DialogContentBody>
-  </DialogContentContainer>
-))`
-  const codeForSecondDialog = `// from this page
-<Dialog>
-  <DialogTrigger asChild>
-    <button type="button">
-      Here is a second button whose pointer event also gets eaten
-    </button>
-  </DialogTrigger>
-  <DialogPrimitive.Content style={{ /* ... */ }}>
-    <DialogPrimitive.Close asChild>
-      <button type="button">Dismiss</button>
-    </DialogPrimitive.Close>
-    Now dismiss this dialog, then try tapping the earlier button again
-    </DialogPrimitive.Content>
-</Dialog>`
   
   return (
     <>
