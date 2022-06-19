@@ -1,3 +1,6 @@
+//
+// radix-dialog-mobile-safari-15-jumps-on-scroll.page.jsx
+//
 import React from 'react'
 
 import Head from 'next/head'
@@ -35,6 +38,10 @@ export default function RadixDialogMobileIssue() {
           <li>
             (View the source code for this page&nbsp;
             <a href="https://github.com/just-learning-1/minimal-repros/blob/master/src/pages/radix-dialog-mobile-safari-15-jumps-on-scroll.page.jsx" target="_blank" rel="noopener noreferrer">
+              here
+            </a>
+            &nbsp;and for the Dialog wrapper component&nbsp;
+            <a href="https://github.com/just-learning-1/minimal-repros/blob/master/src/base/Dialog.jsx" target="_blank" rel="noopener noreferrer">
               here
             </a>
             )
