@@ -1,2 +1,2 @@
 1.  `yarn deploy`
-2.  `https://just-learning-1.github.io/minimal-repros/`
+2.  Visit https://just-learning-1.github.io/minimal-repros/
