@@ -9,8 +9,8 @@ export default function Home() {
       <ol>
         <ul>
           <Link
-            href="/radix-dialog-mobile-safari-ios-15-jumps-on-scroll-when-address-bar-height-animates"
-            as={`${projectDir}/radix-dialog-mobile-safari-ios-15-jumps-on-scroll-when-address-bar-height-animates`}
+            href="/radix-dialog-mobile-safari-15-jumps-on-scroll"
+            as={`${projectDir}/radix-dialog-mobile-safari-15-jumps-on-scroll`}
           >
             <a>Issue: Radix Dialog in mobile Safari iOS 15 jumps on scroll when address bar height animates</a>
           </Link>

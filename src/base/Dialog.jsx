@@ -28,7 +28,7 @@ const Overlay = styled(DialogPrimitive.Overlay, {
   position: 'fixed',
   right: 0,
   top: 0,
-  zIndex: '101',
+  zIndex: '1000',
   '&[data-state="open"]': {
     animation: `${fadeIn} 500ms cubic-bezier(0.22, 1, 0.36, 1)`,
   },
@@ -82,7 +82,7 @@ const DialogContentContainer = styled(DialogPrimitive.Content, {
   top: '0%',
   width: '100%',
   willChange: 'transform',
-  zIndex: '101',
+  zIndex: '1001',
   '&:focus': { outline: 'none' },
   '&[data-state="open"]': {
     animation: `${slideIn} 500ms cubic-bezier(0.22, 1, 0.36, 1),`
@@ -113,10 +113,10 @@ const DialogContentContainer = styled(DialogPrimitive.Content, {
 })
 
 const DialogHeaderBar = styled('div', {
-  height: 'calc($space$iconLength + ($space$dialogPadding * 2))',
+  height: '24px',
   padding: '$dialogPadding',
   position: 'relative',
-  width: '100%',
+  width: 'auto',
 })
 
 const DialogContentBody = styled('div', {
@@ -126,14 +126,13 @@ const DialogContentBody = styled('div', {
   paddingBottom: '$dialogPadding',
   paddingX: '$space$dialogPadding',
   position: 'relative',
-  width: '100%',
+  width: 'auto',
   '@desktop': {
     maxHeight: 'calc(85vh - $$headerHeight)',
   },
 })
 
 const CloseButton = styled(DialogPrimitive.Close, {
-  color: '#000000',
   position: 'relative',
 })
 
