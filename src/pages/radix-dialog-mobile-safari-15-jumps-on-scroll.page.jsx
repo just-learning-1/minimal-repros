@@ -72,6 +72,7 @@ export default function RadixDialogMobileIssue() {
                 <strong>Important notes:</strong>
                 <ul>
                   <li>Happens when the dialog&apos;s contents does not overflow past the viewportal height, but the page beneath&apos;s contents does; the &quot;scrolling&quot; when the dialog is open is of the page underneath</li>
+                  <li>Swipe down twice, then up, for largest gap jump</li>
                   <li>Effect is worse when a button on a fixed bottom bar is the DialogTrigger. In that case, the dark overlay beneath the dialog content is also visible.</li>
                 </ul>
               </DialogContent>
@@ -86,6 +87,7 @@ export default function RadixDialogMobileIssue() {
             <strong>Important notes:</strong>
             <ul>
               <li>Happens when the dialog&apos;s contents does not overflow past the viewportal height, but the page beneath&apos;s contents does; the &quot;scrolling&quot; when the dialog is open is of the page underneath</li>
+              <li>Swipe down twice, then up, for largest gap jump</li>
               <li>Effect is worse when a button on a fixed bottom bar is the DialogTrigger. In that case, the dark overlay beneath the dialog content is also visible.</li>
             </ul>
           </li>
