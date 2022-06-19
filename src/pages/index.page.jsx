@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <div>
       <h1>Issues and Their Minimal Repros</h1>
-      <ol>
-        <ul>
+      <ul style={{ paddingLeft: '0' }}>
+        <li style={{ paddingTop: '12px' }}>
           <Link
             href="/radix-dialog-mobile-safari-15-jumps-on-scroll"
             as={`${projectDir}/radix-dialog-mobile-safari-15-jumps-on-scroll`}
@@ -16,8 +16,8 @@ export default function Home() {
           </Link>
           {' '}
           <em>Created 2022-06-18</em>
-        </ul>
-        <ul>
+        </li>
+        <li style={{ paddingTop: '12px' }}>
           FIXED:
           {' '}
           <Link
@@ -28,8 +28,8 @@ export default function Home() {
           </Link>
           {' '}
           <em>Created 2022-05-14</em>
-        </ul>
-      </ol>
+        </li>
+      </ul>
     </div>
   )
 }
